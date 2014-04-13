@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name="com.mei.shopmore.app.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -18,18 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mei.shopmore.app.goalActivity"
-            android:label="@string/title_activity_goal"
+            android:name="com.mei.shopmore.app.SkipActivity"
+            android:label="@string/title_activity_skip"
             android:parentActivityName="com.mei.shopmore.app.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

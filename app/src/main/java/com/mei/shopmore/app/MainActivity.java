@@ -1,5 +1,7 @@
 package com.mei.shopmore.app;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,8 +14,8 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final String CURRENT_BALANCE = "CURRENT_BALANCE";
-    private static final String GOAL = "GOAL";
+    public static final String CURRENT_BALANCE = "CURRENT_BALANCE";
+    public static final String GOAL = "GOAL";
 
     private double currentBalanceValue;
     private double goalValue;
@@ -26,6 +28,8 @@ public class MainActivity extends ActionBarActivity {
     Button skipped_button;
     Button reduce_button;
     Button reset_button;
+
+    Double skipValue;
 
 
     @Override
@@ -52,6 +56,20 @@ public class MainActivity extends ActionBarActivity {
 
         setButtonOnClickListeners();
 
+        Intent intent = getIntent();
+        String skip = intent.getStringExtra(SkipActivity.SKIP);
+        
+        if (skip != null) {
+            try {
+                skipValue = Double.parseDouble(skip);
+                currentBalanceValue = currentBalanceValue + skipValue;
+            } catch ( NumberFormatException e) {
+            }
+
+        }
+
+        updateCurrentBalance();
+
     }
 
 
@@ -59,8 +77,12 @@ public class MainActivity extends ActionBarActivity {
         skipped_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentBalanceValue = (currentBalanceValue + 10);
-                updateCurrentBalance();
+                Intent intent = new Intent(MainActivity.this, SkipActivity.class);
+                intent.putExtra(CURRENT_BALANCE, currentBalanceValue);
+                startActivity(intent);
+
+//                currentBalanceValue = (currentBalanceValue + 10);
+//                updateCurrentBalance();
             }
         });
 
